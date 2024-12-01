@@ -19,6 +19,8 @@ import lombok.NoArgsConstructor;
 import java.util.ArrayList;
 import java.util.List;
 
+import lombok.ToString;
+
 @Entity
 @Table(name = "cars")
 @Data
@@ -43,15 +45,19 @@ public class Car {
     @Column(nullable = false)
     private double price;
 
+    @ToString.Exclude
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
 
+    @ToString.Exclude
     @ManyToOne
     @JoinColumn(name = "showroom_id")
     private CarShowroom showroom;
 
+    @ToString.Exclude
     @OneToMany(mappedBy = "car", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @Builder.Default
     private List<Review> reviews = new ArrayList<>();
 }
+

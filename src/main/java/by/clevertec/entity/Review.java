@@ -13,6 +13,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import lombok.ToString;
+
 @Entity
 @Table(name = "reviews")
 @Data
@@ -31,12 +33,15 @@ public class Review {
     @Column(nullable = false)
     private int rating;
 
+    @ToString.Exclude
     @ManyToOne
     @JoinColumn(name = "client_id")
     private Client client;
 
+    @ToString.Exclude
     @ManyToOne
     @JoinColumn(name = "car_id")
     private Car car;
 }
+
 

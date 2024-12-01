@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="3e31bb96-171f-4b30-a535-80513a6aaf10" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/by/clevertec/dao/CarDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/by/clevertec/dao/CarShowroomDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/by/clevertec/dao/CategoryDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/by/clevertec/dao/ClientDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/by/clevertec/dao/ReviewDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/by/clevertec/service/CarService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/by/clevertec/service/ClientService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/by/clevertec/service/ReviewService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/by/clevertec/util/HibernateUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/by/clevertec/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/by/clevertec/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/by/clevertec/entity/Car.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/by/clevertec/entity/Car.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/by/clevertec/entity/CarShowroom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/by/clevertec/entity/CarShowroom.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/by/clevertec/entity/Category.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/by/clevertec/entity/Category.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/by/clevertec/entity/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/by/clevertec/entity/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/by/clevertec/entity/Review.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/by/clevertec/entity/Review.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand />
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GradleModuleStateConfig" initialized="true">
+    <option name="configPaths">
+      <map>
+        <entry key="$PROJECT_DIR$" value="C:\Users\Павел\OneDrive\Рабочий стол\3 курс\Clevertec\carService\build.gradle" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 2
+}</component>
+  <component name="ProjectId" id="2pd8bN3i684UntxLn6KTvKqW4ts" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "feature-crud",
+    "last_opened_file_path": "C:/Users/Павел/OneDrive/Рабочий стол/3 курс/Clevertec/carService",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "postgresql"
+    ]
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Павел\OneDrive\Рабочий стол\3 курс\Clevertec\carService" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="3e31bb96-171f-4b30-a535-80513a6aaf10" name="Changes" comment="" />
+      <created>1733075898365</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1733075898365</updated>
+      <workItem from="1733075899515" duration="321000" />
+      <workItem from="1733084678086" duration="68000" />
+      <workItem from="1733084763044" duration="14000" />
+      <workItem from="1733084960449" duration="13000" />
+      <workItem from="1733084981791" duration="124000" />
+      <workItem from="1733085124788" duration="25000" />
+      <workItem from="1733085173577" duration="132000" />
+      <workItem from="1733085319963" duration="1191000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

@@ -19,6 +19,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -44,14 +45,14 @@ public class Client {
     @Column(nullable = false)
     private LocalDate registrationDate;
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.LAZY)
     @CollectionTable(name = "client_contacts", joinColumns = @JoinColumn(name = "client_id"))
     @MapKeyColumn(name = "contact_type")
     @Column(name = "contact_detail")
     @Builder.Default
     private Map<String, String> contacts = new HashMap<>();
 
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(
             name = "client_cars",
             joinColumns = @JoinColumn(name = "client_id"),
@@ -60,7 +61,8 @@ public class Client {
     @Builder.Default
     private List<Car> cars = new ArrayList<>();
 
-    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ToString.Exclude
+    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     @Builder.Default
     private List<Review> reviews = new ArrayList<>();
 }
