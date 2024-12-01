@@ -5,26 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3e31bb96-171f-4b30-a535-80513a6aaf10" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/by/clevertec/dao/CarDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/by/clevertec/dao/CarShowroomDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/by/clevertec/dao/CategoryDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/by/clevertec/dao/ClientDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/by/clevertec/dao/ReviewDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/by/clevertec/service/CarService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/by/clevertec/service/ClientService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/by/clevertec/service/ReviewService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/by/clevertec/util/HibernateUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/by/clevertec/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/by/clevertec/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/by/clevertec/entity/Car.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/by/clevertec/entity/Car.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/by/clevertec/entity/CarShowroom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/by/clevertec/entity/CarShowroom.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/by/clevertec/entity/Category.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/by/clevertec/entity/Category.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/by/clevertec/entity/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/by/clevertec/entity/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/by/clevertec/entity/Review.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/by/clevertec/entity/Review.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/by/clevertec/dao/CarDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/by/clevertec/dao/CarDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/by/clevertec/service/CarService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/by/clevertec/service/CarService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/by/clevertec/service/ReviewService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/by/clevertec/service/ReviewService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,6 +24,9 @@
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
       <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
         <projects_view>
           <tree_state>
             <expand />
@@ -112,7 +100,7 @@
       <workItem from="1733084981791" duration="124000" />
       <workItem from="1733085124788" duration="25000" />
       <workItem from="1733085173577" duration="132000" />
-      <workItem from="1733085319963" duration="1191000" />
+      <workItem from="1733085319963" duration="3260000" />
     </task>
     <servers />
   </component>

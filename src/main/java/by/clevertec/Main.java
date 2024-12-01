@@ -10,6 +10,8 @@ import by.clevertec.entity.CarShowroom;
 import by.clevertec.entity.Category;
 import by.clevertec.entity.Client;
 import by.clevertec.entity.Review;
+import by.clevertec.service.CarService;
+import by.clevertec.service.ReviewService;
 import by.clevertec.util.HibernateUtil;
 import org.hibernate.SessionFactory;
 
@@ -22,6 +24,8 @@ public class Main {
         CarShowroomDAO showroomDAO = new CarShowroomDAO();
         CategoryDAO categoryDAO = new CategoryDAO();
         ReviewDAO reviewDAO = new ReviewDAO();
+        CarService carService = new CarService(carDAO, showroomDAO);
+        ReviewService reviewService = new ReviewService(reviewDAO, carDAO, clientDAO);
 
         try (SessionFactory sessionFactory = HibernateUtil.getSessionFactory()) {
             System.out.println("=== Начало тестов ===");
@@ -38,6 +42,11 @@ public class Main {
                     .build();
             categoryDAO.save(sedanCategory);
 
+            Category miniCategory = Category.builder()
+                    .name("Мини")
+                    .build();
+            categoryDAO.save(miniCategory);
+
             Car car = Car.builder()
                     .model("Camry")
                     .brand("Toyota")
@@ -47,7 +56,15 @@ public class Main {
                     .showroom(showroom)
                     .build();
             carDAO.save(car);
-
+            Car car2 = Car.builder()
+                    .model("Yarys")
+                    .brand("Toyota")
+                    .year(2021)
+                    .price(20000)
+                    .category(miniCategory)
+                    .showroom(showroom)
+                    .build();
+            carDAO.save(car2);
             Client client = Client.builder()
                     .name("Иван Иванов")
                     .registrationDate(LocalDate.now())
@@ -62,39 +79,42 @@ public class Main {
 
             // Создание отзыва
             Review review = Review.builder()
-                    .text("Отличный автомобиль!")
+                    .text("Отличный автомобиль! Классный")
                     .rating(5)
                     .client(client)
                     .car(car)
                     .build();
             reviewDAO.save(review);
+            System.out.println(carService.findCarsByFilters("Toyota", 2021, null, 10000D, 300000D));
+            System.out.println(carService.findAllSortedByPrice("ASC"));
+            System.out.println(carService.findCarsWithPagination(1, 2));
+            System.out.println(reviewService.searchReviews("ывсап"));
 
-            System.out.println("=== Данные об автосалонах ===");
-            showroomDAO.findAll().forEach(System.out::println);
-
-            System.out.println("=== Данные о клиентах ===");
-            clientDAO.findAll().forEach(System.out::println);
-
-            System.out.println("=== Данные об автомобилях ===");
-            carDAO.findAll().forEach(System.out::println);
-
-            System.out.println("=== Данные об отзывах ===");
-            reviewDAO.findAll().forEach(System.out::println);
-
-            // Удаление в правильном порядке
-            System.out.println("=== Удаление объектов ===");
-            // Сначала удаляем отзывы, так как они зависят от машины и клиента
-            reviewDAO.delete(review);
-            // Удаляем машину после удаления отзыва
-            carDAO.delete(car);
-            // Удаляем категорию, так как она может быть зависима от машины (если настроен каскад)
-            categoryDAO.delete(sedanCategory);
-            // Удаляем клиента после удаления его зависимостей
-            clientDAO.delete(client);
-            // Удаляем автосалон в последнюю очередь
-            showroomDAO.delete(showroom);
-
-            System.out.println("=== Удаление завершено ===");
+//
+//            System.out.println("=== Данные об автосалонах ===");
+//            showroomDAO.findAll().forEach(System.out::println);
+//
+//            System.out.println("=== Данные о клиентах ===");
+//            clientDAO.findAll().forEach(System.out::println);
+//
+//            System.out.println("=== Данные об автомобилях ===");
+//            carDAO.findAll().forEach(System.out::println);
+//
+//            System.out.println("=== Данные об отзывах ===");
+//            reviewDAO.findAll().forEach(System.out::println);
+//
+//            // Удаление в правильном порядке
+//            System.out.println("=== Удаление объектов ===");
+//            // Сначала удаляем отзывы, так как они зависят от машины и клиента
+//            reviewDAO.delete(review);
+//            // Удаляем машину после удаления отзыва
+//            carDAO.delete(car);
+//            // Удаляем категорию, так как она может быть зависима от машины (если настроен каскад)
+//            categoryDAO.delete(sedanCategory);
+//            clientDAO.delete(client);
+//            showroomDAO.delete(showroom);
+//
+//            System.out.println("=== Удаление завершено ===");
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
