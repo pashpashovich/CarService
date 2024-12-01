@@ -1,0 +1,46 @@
+plugins {
+    id 'java'
+}
+
+group = 'by.clevertec'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
+}
+
+
+wrapper {
+    version = "8.5"
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+
+dependencies {
+    compileOnly 'org.projectlombok:lombok:1.18.36'
+
+    annotationProcessor 'org.projectlombok:lombok:1.18.36'
+    annotationProcessor 'org.mapstruct:mapstruct-processor:1.6.3'
+
+    implementation('org.hibernate:hibernate-core:6.0.2.Final')
+    implementation 'org.postgresql:postgresql:42.7.4'
+    implementation 'org.projectlombok:lombok:1.18.36'
+    implementation 'org.projectlombok:lombok-mapstruct-binding:0.2.0'
+    implementation 'org.mapstruct:mapstruct:1.6.3'
+    implementation 'ch.qos.logback:logback-classic:1.5.12'
+
+    testImplementation platform('org.junit:junit-bom:5.9.1')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+}
+
+test {
+    useJUnitPlatform()
+}
