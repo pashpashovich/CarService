@@ -5,6 +5,8 @@ import by.clevertec.dao.CarShowroomDAO;
 import by.clevertec.entity.Car;
 import by.clevertec.entity.CarShowroom;
 import by.clevertec.util.HibernateUtil;
+import jakarta.persistence.EntityGraph;
+import jakarta.persistence.EntityManager;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Predicate;
@@ -13,6 +15,7 @@ import org.hibernate.Session;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class CarService {
 
@@ -85,6 +88,30 @@ public class CarService {
                     .setFirstResult((page - 1) * pageSize)
                     .setMaxResults(pageSize)
                     .getResultList();
+        }
+    }
+
+    public List<Car> findCarsByShowroomWithEntityGraph(Long showroomId) {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            EntityManager entityManager = session.getEntityManagerFactory().createEntityManager();
+            EntityGraph<?> graph = entityManager.getEntityGraph("CarShowroom.cars");
+            CarShowroom showroom = entityManager.find(
+                    CarShowroom.class,
+                    showroomId,
+                    Map.of("jakarta.persistence.fetchgraph", graph)
+            );
+            return showroom.getCars();
+        }
+    }
+
+    public List<Car> findCarsByShowroomWithJoinFetch(Long showroomId) {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            return session.createQuery(
+                            "SELECT c FROM Car c " +
+                                    "JOIN FETCH c.showroom s " +
+                                    "WHERE s.id = :showroomId", Car.class)
+                    .setParameter("showroomId", showroomId)
+                    .list();
         }
     }
 }

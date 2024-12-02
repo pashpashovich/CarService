@@ -7,6 +7,8 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.NamedAttributeNode;
+import jakarta.persistence.NamedEntityGraph;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -20,6 +22,10 @@ import java.util.List;
 
 @Entity
 @Table(name = "car_showrooms")
+@NamedEntityGraph(
+        name = "CarShowroom.cars",
+        attributeNodes = @NamedAttributeNode("cars")
+)
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

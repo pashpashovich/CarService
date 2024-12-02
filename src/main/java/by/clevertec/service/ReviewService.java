@@ -12,6 +12,8 @@ import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.search.mapper.orm.Search;
+import org.hibernate.search.mapper.orm.session.SearchSession;
 
 import java.util.List;
 
@@ -66,6 +68,30 @@ public class ReviewService {
         } catch (Exception e) {
             if (transaction != null) transaction.rollback();
             throw e;
+        }
+    }
+
+    public List<Review> searchReviewsByText(String keyword) {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            SearchSession searchSession = Search.session(session);
+            return searchSession.search(Review.class)
+                    .where(f -> f.match()
+                            .fields("text")
+                            .matching(keyword)
+                    )
+                    .fetchAllHits();
+        }
+    }
+
+    public List<Review> searchReviewsByRating(int rating) {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            SearchSession searchSession = Search.session(session);
+            return searchSession.search(Review.class)
+                    .where(f -> f.match()
+                            .field("rating")
+                            .matching(rating)
+                    )
+                    .fetchAllHits();
         }
     }
 
