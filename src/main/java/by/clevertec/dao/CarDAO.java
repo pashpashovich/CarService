@@ -3,14 +3,9 @@ package by.clevertec.dao;
 import by.clevertec.entity.Car;
 import by.clevertec.entity.Client;
 import by.clevertec.util.HibernateUtil;
-import jakarta.persistence.criteria.CriteriaBuilder;
-import jakarta.persistence.criteria.CriteriaQuery;
-import jakarta.persistence.criteria.Predicate;
-import jakarta.persistence.criteria.Root;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class CarDAO {

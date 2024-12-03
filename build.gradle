@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'com.github.johnrengelman.shadow' version '8.1.1'
 }
 
 group = 'by.clevertec'
@@ -14,10 +15,21 @@ java {
     targetCompatibility = JavaVersion.VERSION_21
 }
 
+jar {
+    manifest {
+        attributes(
+                'Main-Class': 'by.clevertec.Main'
+        )
+    }
+}
 
 wrapper {
     version = "8.5"
 }
+
+compileJava.options.encoding = 'UTF-8'
+javadoc.options.encoding = 'UTF-8'
+compileTestJava.options.encoding = 'UTF-8'
 
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'

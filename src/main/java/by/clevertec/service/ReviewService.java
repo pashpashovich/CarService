@@ -1,7 +1,5 @@
 package by.clevertec.service;
 
-import by.clevertec.dao.CarDAO;
-import by.clevertec.dao.ClientDAO;
 import by.clevertec.dao.ReviewDAO;
 import by.clevertec.entity.Car;
 import by.clevertec.entity.Client;
@@ -20,19 +18,12 @@ import java.util.List;
 public class ReviewService {
 
     private final ReviewDAO reviewDAO;
-    private final CarDAO carDAO;
-    private final ClientDAO clientDAO;
 
-    public ReviewService(ReviewDAO reviewDAO, CarDAO carDAO, ClientDAO clientDAO) {
+    public ReviewService(ReviewDAO reviewDAO) {
         this.reviewDAO = reviewDAO;
-        this.carDAO = carDAO;
-        this.clientDAO = clientDAO;
     }
 
-    public void addReview(Long clientId, Long carId, String text, int rating) {
-        Client client = clientDAO.findById(clientId);
-        Car car = carDAO.findById(carId);
-
+    public void addReview(Client client, Car car, String text, int rating) {
         if (client != null && car != null) {
             Review review = Review.builder()
                     .client(client)
@@ -40,7 +31,6 @@ public class ReviewService {
                     .text(text)
                     .rating(rating)
                     .build();
-
             reviewDAO.save(review);
         } else {
             throw new IllegalArgumentException("Клиент или автомобиль не найден.");

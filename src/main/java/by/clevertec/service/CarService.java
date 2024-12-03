@@ -1,7 +1,6 @@
 package by.clevertec.service;
 
 import by.clevertec.dao.CarDAO;
-import by.clevertec.dao.CarShowroomDAO;
 import by.clevertec.entity.Car;
 import by.clevertec.entity.CarShowroom;
 import by.clevertec.util.HibernateUtil;
@@ -20,21 +19,23 @@ import java.util.Map;
 public class CarService {
 
     private final CarDAO carDAO;
-    private final CarShowroomDAO showroomDAO;
+    private static final String PRICE = "price";
 
-    public CarService(CarDAO carDAO, CarShowroomDAO showroomDAO) {
+    public CarService(CarDAO carDAO) {
         this.carDAO = carDAO;
-        this.showroomDAO = showroomDAO;
     }
 
-    public void addCarToShowroom(Car car, Long showroomId) {
-        CarShowroom showroom = showroomDAO.findById(showroomId);
-        if (showroom != null) {
-            car.setShowroom(showroom);
-            carDAO.save(car);
-        } else {
-            throw new IllegalArgumentException("Автосалон с ID " + showroomId + " не найден.");
+    public void assignCarToShowroom(Car car, CarShowroom carShowroom) {
+        if (car.getShowroom() != null && car.getShowroom().equals(carShowroom)) {
+            throw new IllegalStateException("Car is already assigned to this showroom.");
         }
+        car.setShowroom(carShowroom);
+        carDAO.update(car);
+    }
+
+
+    public void addCar(Car car) {
+        carDAO.save(car);
     }
 
     public List<Car> findCarsByFilters(String brand, Integer year, String category, Double minPrice, Double maxPrice) {
@@ -53,10 +54,10 @@ public class CarService {
                 predicates.add(cb.equal(root.get("category").get("name"), category));
             }
             if (minPrice != null) {
-                predicates.add(cb.greaterThanOrEqualTo(root.get("price"), minPrice));
+                predicates.add(cb.greaterThanOrEqualTo(root.get(PRICE), minPrice));
             }
             if (maxPrice != null) {
-                predicates.add(cb.lessThanOrEqualTo(root.get("price"), maxPrice));
+                predicates.add(cb.lessThanOrEqualTo(root.get(PRICE), maxPrice));
             }
             query.select(root).where(cb.and(predicates.toArray(new Predicate[0])));
             return session.createQuery(query).getResultList();
@@ -69,9 +70,9 @@ public class CarService {
             CriteriaQuery<Car> query = cb.createQuery(Car.class);
             Root<Car> root = query.from(Car.class);
             if ("DESC".equalsIgnoreCase(sortOrder)) {
-                query.orderBy(cb.desc(root.get("price")));
+                query.orderBy(cb.desc(root.get(PRICE)));
             } else {
-                query.orderBy(cb.asc(root.get("price")));
+                query.orderBy(cb.asc(root.get(PRICE)));
             }
             query.select(root);
             return session.createQuery(query).getResultList();
@@ -93,13 +94,15 @@ public class CarService {
 
     public List<Car> findCarsByShowroomWithEntityGraph(Long showroomId) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            EntityManager entityManager = session.getEntityManagerFactory().createEntityManager();
-            EntityGraph<?> graph = entityManager.getEntityGraph("CarShowroom.cars");
-            CarShowroom showroom = entityManager.find(
-                    CarShowroom.class,
-                    showroomId,
-                    Map.of("jakarta.persistence.fetchgraph", graph)
-            );
+            CarShowroom showroom;
+            try (EntityManager entityManager = session.getEntityManagerFactory().createEntityManager()) {
+                EntityGraph<?> graph = entityManager.getEntityGraph("CarShowroom.cars");
+                showroom = entityManager.find(
+                        CarShowroom.class,
+                        showroomId,
+                        Map.of("jakarta.persistence.fetchgraph", graph)
+                );
+            }
             return showroom.getCars();
         }
     }
@@ -114,5 +117,6 @@ public class CarService {
                     .list();
         }
     }
+
 }
 
