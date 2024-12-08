@@ -1,33 +1,70 @@
 package by.clevertec.service;
 
+import by.clevertec.dto.ClientDto;
 import by.clevertec.entity.Car;
 import by.clevertec.entity.Client;
-import by.clevertec.util.HibernateUtil;
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
+import by.clevertec.mapper.ClientMapper;
+import by.clevertec.repository.CarRepository;
+import by.clevertec.repository.ClientRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
+import java.util.List;
+import java.util.Optional;
+
+@Service
 public class ClientService {
-    public static void buyCar(Client client, Car car) {
-        Transaction transaction = null;
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            transaction = session.beginTransaction();
-            if (client != null && car != null) {
-                client.getCars().add(car);
-                car.setShowroom(null);
-                session.merge(client);
-                session.merge(car);
-            } else {
-                throw new IllegalArgumentException("Клиент или автомобиль не найден.");
-            }
-            transaction.commit();
-        } catch (Exception e) {
-            if (transaction != null) transaction.rollback();
-            throw e;
-        }
+
+    private final ClientRepository clientRepository;
+    private final ClientMapper clientMapper;
+    private final CarRepository carRepository;
+
+    @Autowired
+    public ClientService(ClientRepository clientRepository, ClientMapper clientMapper, CarRepository carRepository) {
+        this.clientRepository = clientRepository;
+        this.clientMapper = clientMapper;
+        this.carRepository = carRepository;
     }
 
-}
+    public ClientDto saveClient(ClientDto clientDto) {
+        Client client = clientMapper.clientDtoToClient(clientDto);
+        Client savedClient = clientRepository.save(client);
+        return clientMapper.clientToClientDto(savedClient);
+    }
 
+    @Transactional
+    public Optional<ClientDto> getClientDtoById(Long id) {
+        Optional<Client> client = clientRepository.findById(id);
+        return client.map(clientMapper::clientToClientDto);
+    }
+    @Transactional
+    public Optional<Client> getClientById(Long id) {
+        Optional<Client> client = clientRepository.findById(id);
+        return client;
+    }
+
+    @Transactional
+    public List<ClientDto> getAllClients() {
+        List<Client> clients = clientRepository.findAll();
+        return clients.stream().map(clientMapper::clientToClientDto).toList();
+    }
+
+    @Transactional
+    public void assignCarToClient(Long carId, Long clientId) {
+        Car car = carRepository.findById(carId).orElseThrow(() -> new IllegalArgumentException("Автомобиль не найден"));
+        Client client = clientRepository.findById(clientId).orElseThrow(() -> new IllegalArgumentException("Клиент не найден"));
+
+        if (car.getShowroom() == null) {
+            throw new IllegalStateException("Этот автомобиль уже был куплен");
+        }
+        client.getCars().add(car);
+        car.setShowroom(null);
+        carRepository.save(car);
+        clientRepository.save(client);
+    }
+
+    public void deleteClient(Long id) {
+        clientRepository.deleteById(id);
+    }
+}
