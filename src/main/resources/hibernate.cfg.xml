@@ -11,10 +11,7 @@
         <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
         <property name="hibernate.show_sql">false</property>
         <property name="hibernate.format_sql">true</property>
-        <property name="hibernate.hbm2ddl.auto">create</property>
-        <property name="hibernate.search.backend.type">lucene</property>
-        <property name="hibernate.search.backend.directory.type">local-heap</property>
-        <property name="hibernate.search.backend.directory.root">./indexes</property>
+        <property name="hibernate.hbm2ddl.auto">update</property>
         <property name="hibernate.cache.use_second_level_cache">true</property>
         <property name="hibernate.cache.region.factory_class">jcache</property>
         <property name="hibernate.javax.cache.provider">org.ehcache.jsr107.EhcacheCachingProvider</property>
