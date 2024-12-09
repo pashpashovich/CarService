@@ -8,6 +8,7 @@ import by.clevertec.mapper.CarMapper;
 import by.clevertec.repository.CarRepository;
 import by.clevertec.repository.CarRepositoryCustom;
 import by.clevertec.repository.CarRepositoryCustomImpl;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -32,20 +33,20 @@ public class CarService {
 
     @Transactional
     public void assignCarToShowroom(Car car, CarShowroom carShowroom) {
-        if (car.getShowroom() != null && car.getShowroom().equals(carShowroom)) {
-            throw new IllegalStateException("Car is already assigned to this showroom.");
-        }
+        if (car.getShowroom() != null && car.getShowroom().equals(carShowroom)) throw new IllegalStateException("Машина уже привязана к этому салону");
         car.setShowroom(carShowroom);
         carRepository.save(car);
     }
 
     public Car getCarById(Long id) {
         if (carRepository.findById(id).isPresent())
+        {
             return carRepository.findById(id).get();
+        }
         else throw new NotFoundException("Автомобиль не найден");
     }
 
-    public void addCar(Car car) {
+    public void addCar(@Valid Car car) {
         carRepository.save(car);
     }
 

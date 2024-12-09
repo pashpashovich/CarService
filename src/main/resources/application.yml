@@ -12,3 +12,5 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
 liquibase:
   change-log: classpath:db/changelog/db.changelog-master.xml
+  contexts: dev, test
+  enabled: true

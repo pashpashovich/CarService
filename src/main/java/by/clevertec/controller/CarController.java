@@ -4,13 +4,13 @@ import by.clevertec.API.ApiResponse;
 import by.clevertec.dto.CarDto;
 import by.clevertec.entity.Car;
 import by.clevertec.entity.CarShowroom;
-import by.clevertec.entity.Client;
 import by.clevertec.mapper.CarMapper;
 import by.clevertec.service.CarService;
 import by.clevertec.service.CarShowroomService;
 import by.clevertec.service.CategoryService;
 import by.clevertec.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+@Validated
 @RestController
 @RequestMapping("/api/cars")
 public class CarController {
@@ -42,10 +43,9 @@ public class CarController {
         this.clientService = clientService;
     }
 
-    // Добавление нового автомобиля
     @PostMapping()
-    public ApiResponse<CarDto> addCar(@RequestBody CarDto carDto) {
-        Car car = carMapper.carDtoToCar(carDto,categoryService);
+    public ApiResponse<CarDto> addCar(@Validated @RequestBody CarDto carDto) {
+        Car car = carMapper.carDtoToCar(carDto, categoryService);
         carService.addCar(car);
         return ApiResponse.<CarDto>builder()
                 .data(carMapper.carToCarDTO(car))
@@ -55,8 +55,8 @@ public class CarController {
     }
 
     @PutMapping("/{id}")
-    public ApiResponse<CarDto> updateCar(@PathVariable Long id, @RequestBody CarDto carDTO) {
-        Car car = carMapper.carDtoToCar(carDTO,categoryService);
+    public ApiResponse<CarDto> updateCar(@PathVariable Long id, @Validated @RequestBody CarDto carDTO) {
+        Car car = carMapper.carDtoToCar(carDTO, categoryService);
         car.setId(id);
         carService.addCar(car);
         return ApiResponse.<CarDto>builder()
@@ -105,7 +105,17 @@ public class CarController {
         return ApiResponse.<List<CarDto>>builder()
                 .data(cars)
                 .status(true)
-                .message("Cars fetched successfully")
+                .message("Автомобили получены успешно")
+                .build();
+    }
+
+    @GetMapping("/sorted")
+    public ApiResponse<List<CarDto>> getCarsSorted(@RequestParam(required = false) String order) {
+        List<CarDto> cars = carService.findAllSortedByPrice(order);
+        return ApiResponse.<List<CarDto>>builder()
+                .data(cars)
+                .status(true)
+                .message("Автомобили получены успешно")
                 .build();
     }
 }
